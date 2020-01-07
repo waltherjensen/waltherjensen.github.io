@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{{site.title}}</title>
+
+  {% if site.favicon %}
+  <link rel="icon" type="{% if site.favicon == 'png' %}image/png{% else %}image/x-icon{% endif %}" href="{{site.github.url}}/favicon.{{site.favicon}}" />
+  {% endif %}
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- <link href="{{site.github.url}}/assets/css/docs.min.css" rel="stylesheet"> -->
+  <link href="{{site.github.url}}/assets/css/style.css" rel="stylesheet">
+  <style>
+    #content {
+      background:{{site.header.color1}};
+      background:linear-gradient(135deg, {{site.header.color1}}, {{site.header.color2}});
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- <script src="{{site.github.url}}/assets/js/docs.min.js"></script>
+  <script src="{{site.github.url}}/assets/js/script.js"></script> -->
+</head>
+
+<body style="padding-top: 80px">
+  <!-- Main navigation
+  =========================================== -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <span class="d-block d-lg-none float-left" href="#">Physical Computing 101</span>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav">{% if site.customNavBar %}{% include navbar.html %}{% else %}{% assign sorted_pages = site.pages | sort:"name" %}{% for p in sorted_pages %}{% if p.isHome != true and p.hide != true and p.title != '' %}
+          <li class="nav-item {% if page.title==p.title %}active {% endif %}">
+            <a class="nav-link" href="{{site.github.url}}{{p.url}}">
+              <!--{{p.title}}-->
+              <h6><small>{{p.description}}</small></h6>
+            </a>
+          </li>{% endif %}{% endfor %}{% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container bs-docs-container text-justify">
+    <div class="row" style="margin-left: 5px; margin-right: 5px">
+      {{content}}
+    </div>
+  </div>
+
+
+  <!-- Footer
+  =========================================== -->
+  <footer>
+    <div class="container text-center" style="padding-top: 20px">
+      <small>Site created by Walther Jensen. Authors: Walther Jensen, Patrycja Zdziarska, Matt Francisco. Visual Design: Bob the Builder.</br> © 2020 Copyright: Walther Jensen and Patrycja Zdziarska
+      </small>
+    </div>
+  </footer>
+
+
+  <!-- Async scripts
+  =========================================== -->
+  {% if site.header.trianglify %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/1.0.1/trianglify.min.js"></script>
+  <script>
+    jekyllBootstrapDoc.trianglify('{{site.header.color1}}', '{{site.header.color2}}', '{{site.name}}');
+  </script>
+  {% endif %}
+
+  {% if site.twitter.enabled or site.twitter.account %}
+  <script>
+    window.twttr = (function(d, s, id) {
+      var t, js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.async = 1;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      return window.twttr || (t = {
+        _e: [],
+        ready: function(f) {
+          t._e.push(f)
+        }
+      });
+    }(document, "script", "twitter-wjs"));
+  </script>
+  {% endif %}
+
+  {% if site.facebook.enabled or site.facebook.profileUrl %}
+  <div id="fb-root"></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+  {% endif %}
+
+  {% if site.analytics.account and site.analytics.domain %}
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', '{{site.analytics.account}}', '{{site.analytics.domain}}');
+    ga('send', 'pageview');
+  </script>
+  {% endif %}
+
+</body>
+
+</html>

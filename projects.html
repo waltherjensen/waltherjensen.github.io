@@ -1,0 +1,18 @@
+---
+layout: default
+title: Projects
+isHome: false
+---
+
+{% assign sorted = site.projects | where: 'hidden',false | sort: 'weight' | reverse %}
+{% for project in sorted %}
+<div class="row border-top mt-5 pt-5 mb-5" >
+  <div class="col-7 pr-4" style="height: 300px; overflow: hidden">
+    <img src="/assets/projects/{{ project.teaser_img}}" class="img-fluid mx-auto d-block"/>
+  </div>
+  <div class="col-5" style="height: 300px; overflow: hidden">
+    <h4 class="pb-4">{{ project.title }}</h4>
+    <p class="text-justify">{{ project.content }}</p>
+  </div>
+</div>
+{% endfor %}

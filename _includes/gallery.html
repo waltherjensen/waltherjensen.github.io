@@ -1,0 +1,23 @@
+<h3 class="mb-4 border-bottom font-weight-light">Gallery</h3>
+<div>
+
+{% assign i = 0 %}
+{% for photo in site.static_files %}
+  {% if photo.path contains include.folder%}
+    {% assign modded = i | modulo:3 %}
+
+    {% if modded == 0 %}
+    <div class="row mt-4">
+    {% endif %}
+
+      <div class="col"><img src="{{photo.path}}"  class="img-fluid"/></div>
+
+    {% if modded == 2 %}
+    </div>
+    {% endif %}
+
+    {% assign i = i | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+</div>

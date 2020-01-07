@@ -1,1 +1,8 @@
-theme: jekyll-theme-minimal
+#theme: jekyll-theme-minimal
+title: Walther Jensen Portfolio
+author: Walther Jensen
+
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:name:output_ext
