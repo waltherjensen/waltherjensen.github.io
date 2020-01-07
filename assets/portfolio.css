@@ -1,5 +1,22 @@
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
 
+.fa-scholar {
+  display: inline-block;
+  background: no-repeat url('/assets/scholar_icon.svg');
+  margin-top: 20px;
+  width: 16px;
+  height: 16px;
+}
+
+.btn-scholar
+{
+    background-color: #4183c4;
+}
+.btn-scholar:hover
+{
+    background-color: #689cd0;
+}
+
 
 a.btn-social,
 .btn-social
